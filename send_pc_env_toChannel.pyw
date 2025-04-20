@@ -11,7 +11,7 @@ THINGSPEAK_URL = "https://api.thingspeak.com/update"
 THINGSPEAK_API_KEY = "WRITE_API_KEY"  # 各自の WRITE_API_KEY　を設定
 
 # 各自ローカルフォルダの任意の場所とファイル名を指定する
-LOCAL_LOG_FILE = "C:/MyWork/2025_LecSmartDevice/log/work.log"
+LOCAL_LOG_FILE = "./task_log.log"  # ログファイルのパス
 print(LOCAL_LOG_FILE)
 
 
