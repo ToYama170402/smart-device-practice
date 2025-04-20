@@ -6,5 +6,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "psutil>=7.0.0",
+    "python-dotenv>=1.1.0",
     "requests>=2.32.3",
 ]
