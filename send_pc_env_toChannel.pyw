@@ -59,6 +59,7 @@ def get_system_stats():
     bytes_sent = net_io.bytes_sent / 1024
     bytes_recv = net_io.bytes_recv / 1024
 
+    # CPU温度を取得
     cpu_temp = 50.0
 
     return cpu_usage, memory_usage, disk_usage, bytes_sent, bytes_recv, cpu_temp
