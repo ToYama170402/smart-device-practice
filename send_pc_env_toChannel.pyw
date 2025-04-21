@@ -68,12 +68,12 @@ def get_system_stats():
 # ThingSpeakへ送信
 # -------------------
 def send_data_to_thingspeak(
-    cpu,
-    memory,
-    disk,
-    bytes_sent,
-    bytes_recv,
-    cpu_temp,
+    cpu: float,
+    memory: float,
+    disk: float,
+    bytes_sent: float,
+    bytes_recv: float,
+    cpu_temp: float,
 ):
     # ThingSpeakにデータを送信する
     payload = {
