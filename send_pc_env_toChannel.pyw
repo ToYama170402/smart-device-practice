@@ -4,6 +4,7 @@ import time  # データ送信間隔を設定するための time ライブラ�
 import datetime
 import os
 from dotenv import load_dotenv
+from utils.get_cpu_temp import get_cpu_temperature
 
 # .envファイルを読み込む
 load_dotenv()
@@ -60,7 +61,11 @@ def get_system_stats():
     bytes_recv = net_io.bytes_recv / 1024
 
     # CPU温度を取得
-    cpu_temp = 50.0
+    cpu_temp = get_cpu_temperature()
+    if cpu_temp is None:
+        cpu_temp = 0  # 温度が取得できない場合は0を代入
+    else:
+        cpu_temp = cpu_temp
 
     return cpu_usage, memory_usage, disk_usage, bytes_sent, bytes_recv, cpu_temp
 
