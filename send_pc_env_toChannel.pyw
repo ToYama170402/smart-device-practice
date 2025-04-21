@@ -59,13 +59,22 @@ def get_system_stats():
     bytes_sent = net_io.bytes_sent / 1024
     bytes_recv = net_io.bytes_recv / 1024
 
-    return cpu_usage, memory_usage, disk_usage, bytes_sent, bytes_recv
+    cpu_temp = 50.0
+
+    return cpu_usage, memory_usage, disk_usage, bytes_sent, bytes_recv, cpu_temp
 
 
 # -------------------
 # ThingSpeakへ送信
 # -------------------
-def send_data_to_thingspeak(cpu, memory, disk, bytes_sent, bytes_recv):
+def send_data_to_thingspeak(
+    cpu,
+    memory,
+    disk,
+    bytes_sent,
+    bytes_recv,
+    cpu_temp,
+):
     # ThingSpeakにデータを送信する
     payload = {
         "api_key": THINGSPEAK_API_KEY,
@@ -74,6 +83,7 @@ def send_data_to_thingspeak(cpu, memory, disk, bytes_sent, bytes_recv):
         "field3": disk,
         "field4": bytes_sent,
         "field5": bytes_recv,
+        "field6": cpu_temp,
     }
     log("データ送信中: " + str(payload))
 
@@ -94,13 +104,13 @@ def send_data_to_thingspeak(cpu, memory, disk, bytes_sent, bytes_recv):
 while True:
     log("== start ==")
     # システムステータスを取得
-    cpu, memory, disk, bytes_sent, bytes_recv = get_system_stats()
+    cpu, memory, disk, bytes_sent, bytes_recv, cpu_temp = get_system_stats()
     print(
-        f"CPU使用率: {cpu}% | メモリ使用率: {memory}% | ディスク使用率: {disk}%  | 送信バイト数: {bytes_sent} | 受信バイト数: {bytes_recv}"
+        f"CPU使用率: {cpu}% | メモリ使用率: {memory}% | ディスク使用率: {disk}%  | 送信バイト数: {bytes_sent} | 受信バイト数: {bytes_recv} | CPU温度: {cpu_temp}"
     )
 
     # ThingSpeakにデータを送信
-    send_data_to_thingspeak(cpu, memory, disk, bytes_sent, bytes_recv)
+    send_data_to_thingspeak(cpu, memory, disk, bytes_sent, bytes_recv, cpu_temp)
 
     # 30秒間待機
     time.sleep(30)
